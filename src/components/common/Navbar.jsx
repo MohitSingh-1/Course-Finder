@@ -30,7 +30,6 @@ const Navbar = () => {
     const fetchSublinks = async()=>{
             try{
                 const result = await apiConnector("GET", categories.CATEGORIES_API);
-                console.log("Result => ",result.data.allCategory);
                 setSubLinks(result.data.allCategory);
             }catch(err){
                 console.log("Error while fetching the calatog list : ",err);
@@ -40,10 +39,6 @@ const Navbar = () => {
     useEffect(()=>{
         fetchSublinks();
     },[])
-
-    useEffect(()=>{
-        console.log(subLinks);
-    },[subLinks])
 
     const oneTimeClick = ()=>{
         setIsMenuOpen(!isMenuOpen);
@@ -78,7 +73,7 @@ const Navbar = () => {
             <ul className="flex md:flex-row flex-col text-end gap-6 md:gap-10 md:p-0 p-4 items-center justify-center ">
                 {
                     NavbarLinks.map((link, index)=>(
-                        <li kay={index}>
+                        <li key={index}>
                             {
                                 link.title === "Catalog" ? (
                                     <div 
