@@ -9,12 +9,4 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  server:{
-    port:3000,
-  },
-  build: {
-    rollupOptions: {
-      external: ['@reduxjs/toolkit']
-    }
-  },
 })
