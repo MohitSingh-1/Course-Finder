@@ -24,7 +24,7 @@ app.use(express.json());    // middleware for parsing the data into json
 // frontend at 3000 port number will be entertained
 app.use(
 	cors({
-		origin:"http://localhost:3000",
+		origin:"https://course-finder-u031.onrender.com",
 		credentials:true,
 	})
 );
