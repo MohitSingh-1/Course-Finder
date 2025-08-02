@@ -139,9 +139,9 @@ const Home = () => {
       </section>
 
       {/* Reviws from Other Learner */}
-      <h1 className="text-center text-4xl font-semibold mt-8 text-white mb-20">
+      {/* <h1 className="text-center text-4xl font-semibold mt-8 text-white mb-20">
         Reviews from other learners
-      </h1>
+      </h1> */}
 
 
       {/* Footer */}

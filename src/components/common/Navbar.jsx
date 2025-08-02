@@ -131,7 +131,7 @@ const Navbar = () => {
                     )}
                   </div>
                 ) : (
-                  <NavLink to={link.path} className={navLinkClass}>
+                  <NavLink to={link.path} className={navLinkClass} onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     {link.title}
                   </NavLink>
                 )}

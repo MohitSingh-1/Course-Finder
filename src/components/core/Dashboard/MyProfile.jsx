@@ -77,7 +77,7 @@ dispatch(setUser(result.data.userDetails))
   return (
     <div className="flex flex-row">
       <Sidebar />
-      <div className="text-white w-7/12 mx-auto py-10 flex flex-col gap-10">
+      <div className="text-white md:w-7/12 w-[90%] mx-auto py-10 flex flex-col gap-10">
         {/* Top Card */}
         <div className="bg-gray-800 p-6 rounded-md flex justify-between items-center">
           <div className="flex items-center gap-4">
