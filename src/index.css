@@ -35,3 +35,17 @@ html, body{
   filter: blur(34px);
   transform: matrix(1, 0, -0.03, 1, 0, 0);
 }
+
+.bgColor{
+  background: #000814;
+}
+
+.cor_wish{
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    z-index: 11111;
+}
+.course_main{
+  position: relative;
+}

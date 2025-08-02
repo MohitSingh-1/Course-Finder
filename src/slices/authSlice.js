@@ -1,10 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit"
 
-
+console.log(typeof(localStorage.getItem("token")))
 const initialState = {
     signupData:null,
     loading:false,
-    token : localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")):null,
+    token : (localStorage.getItem("token")!=undefined&&localStorage.getItem("token")!=null) ? JSON.parse(localStorage.getItem("token")):null,
     
 }
 

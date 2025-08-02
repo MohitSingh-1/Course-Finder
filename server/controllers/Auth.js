@@ -4,6 +4,7 @@ const OTP = require("../models/OTP");
 const otpGenerator = require("otp-generator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { toast } = require("react-toastify");
 require("dotenv").config();
 
 
@@ -274,9 +275,10 @@ exports.changePassword = async(req,res)=>{
     // send mail -> password updated
     // return response
 
+    const { id }=req.params
     // get data
     const {oldPassword, newPassword, confirmNewPassword} = req.body;
-
+    console.log(oldPassword, newPassword, confirmNewPassword,id)
     //validate
     if(!oldPassword || !newPassword || !confirmNewPassword){
         return res.status(400).json({
@@ -284,8 +286,34 @@ exports.changePassword = async(req,res)=>{
             message:"please fill all the fields"
         })
     }
-    
-    // 
+
+    const userDetails = await User.findById(id);
+    if(!userDetails){
+        return res.status(400).json({
+            success:false,
+            message:"Id is invalid",
+        })
+    }
+
+    const isPasswordMatch = await bcrypt.compare(oldPassword, userDetails.password);
+
+    if(!isPasswordMatch){
+        return res.status(400).json({
+            success:false,
+            message:"Invalid Password",
+        })
+    }
+
+    const hashedPasssword = await bcrypt.hash(newPassword, 10);
+
+    const updatedPassword = await User.findByIdAndUpdate(id, {
+        password:hashedPasssword,
+    },{new:true})
+    return res.status(200).json({
+        success:true,
+        message:"Password updated",
+        updatedPassword,
+    })
 }
 
 

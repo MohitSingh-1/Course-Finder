@@ -18,7 +18,7 @@ const Home = () => {
       <section className="flex flex-col text-center ">
         {/* upper div button */}
         <div className="relative mx-auto flex flex-col w-11/12 items-center  text-white justify-between ">
-          <Link to={"/signup"}>
+          <Link to={"/signup"} state={{ role: "Instructor" }}>
             <div
               className="group mt-16 p-1 mx-auto rounded-full bg-gray-700 font-bold text-gray-300 
                                 transition-all duration-200 hover:scale-95 w-fit"

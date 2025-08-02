@@ -7,6 +7,8 @@ const {
     createCourse,
     getAllCourses,
     getCourseDetails,
+    getAllCoursesByInstructorId,
+    getAllCoursesByCategoryId
 } = require("../controllers/Coures");
 
 // category controller import
@@ -50,6 +52,10 @@ router.post("/deleteSection", auth, isInstructor, deleteSection);
 
 // get All registered courses
 router.get("/getAllCourses", getAllCourses);
+
+// get courses by category id
+router.get("/getAllCoursesByCategoryId/:id", getAllCoursesByCategoryId);
+
 // get details of specific course
 router.get("/getCourseDetails", getCourseDetails);
 
@@ -59,9 +65,11 @@ router.get("/getCourseDetails", getCourseDetails);
 // Category can Only be Created by Admin
 
 // Create a category
-router.post("/createCategory", auth, isAdmin, createCategory);
+router.post("/createCategory",  createCategory);
 // show all the available categories
 router.get("/getAllCategories", getAllCategories);
+// get courses by instructor
+router.get("/getAllCoursesByInstructorId/:id", getAllCoursesByInstructorId);
 // get category page details for page category of frontend
 router.get("/getCategoryPageDetails", categoryPageDetails);
 

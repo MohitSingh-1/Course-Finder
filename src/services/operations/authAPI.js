@@ -5,6 +5,9 @@ import { setLoading, setToken } from "../../slices/authSlice"
 import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiConnector"
 import { endpoints } from "../apis"
+import { useState } from "react"
+import ConfirmLogout from "../../pages/ConfirmLogout"
+import { useSelector } from "react-redux"
 
 const {
   SENDOTP_API,
@@ -12,6 +15,7 @@ const {
   LOGIN_API,
   RESETPASSTOKEN_API,
   RESETPASSWORD_API,
+  CHANGEPASSWORD_API,
 } = endpoints
 
 export function sendOtp(email, navigate) {
@@ -132,7 +136,29 @@ export function logout(navigate) {
   }
 }
 
+export function changePassword(oldPassword, newPassword, confirmNewPassword,user){
+  return async(dispatch) => {
+    dispatch(setLoading(true));
+    try{
 
+      const response = await apiConnector("POST", `${CHANGEPASSWORD_API}/${user._id}`, {oldPassword, newPassword, confirmNewPassword});
+
+      console.log("Update Password RESPONSE ... ", response);
+
+
+      if(!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      toast.success("Password has been Updated successfully");
+    }
+    catch(error) {
+      console.log("RESET PASSWORD TOKEN Error", error);
+      toast.error("Unable to Update password");
+    }
+    dispatch(setLoading(false));
+  }
+}
 
 export function getPasswordResetToken(email , setEmailSent) {
   return async(dispatch) => {

@@ -1,194 +1,210 @@
-import React, {useRef, useEffect, useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { IoCartOutline } from 'react-icons/io5';
-import { IoIosArrowDown } from 'react-icons/io';
+import React, { useEffect, useState, useRef } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { FaHeart, FaUser, FaCog, FaSignOutAlt, FaBook, FaPlus } from "react-icons/fa";
+import { IoIosArrowDown } from "react-icons/io";
+import { IoCartOutline } from "react-icons/io5";
 
-import logo from '../../assets/Logo/logo.png';
-import { NavbarLinks } from '../../data/navbar-links';
-
-import ProfileDropDown from '../core/Auth/ProfileDropDown';
-
-import { apiConnector } from '../../services/apiConnector';
-import { categories } from '../../services/apis';
-import useOnClickOutside from "../../hooks/useOnClickOutside"
+import logo from "../../assets/Logo/logo.png";
+import { NavbarLinks } from "../../data/navbar-links";
+import { setToken } from "../../slices/authSlice";
+import { setUser } from "../../slices/profileSlice";
+import ProfileDropDown from "../core/Auth/ProfileDropDown";
+import { logout } from "../../services/operations/authAPI";
+import { apiConnector } from "../../services/apiConnector";
+import { categories } from "../../services/apis";
+import { ACCOUNT_TYPE } from "../../utils/Constants";
 
 const Navbar = () => {
-    
-    const ref = useRef(null);
-    useOnClickOutside(ref, () => setShowCatalog(false))
-    const {token} = useSelector( (state) => state.auth );
-    const {user} = useSelector((state)=> state.profile);
-    const {totalItem} = useSelector( (state) => state.cart );
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [showCatalog, setShowCatalog] = useState(false);
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const [subLinks, setSubLinks] = useState([]);
+  const { token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state?.profile);
 
-    const fetchSublinks = async()=>{
-            try{
-                const result = await apiConnector("GET", categories.CATEGORIES_API);
-                setSubLinks(result.data.allCategory);
-            }catch(err){
-                console.log("Error while fetching the calatog list : ",err);
-            }
-        }
-        
-    useEffect(()=>{
-        fetchSublinks();
-    },[])
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showCatalog, setShowCatalog] = useState(false);
+  const [subLinks, setSubLinks] = useState([]);
 
-    const oneTimeClick = ()=>{
-        setIsMenuOpen(!isMenuOpen);
-    }
+  const ref = useRef(null);
 
- 
+  useEffect(() => {
+    const fetchSublinks = async () => {
+      try {
+        const result = await apiConnector("GET", categories.CATEGORIES_API);
+        setSubLinks(result.data.allCategory);
+      } catch (err) {
+        console.log("Error while fetching catalog list:", err);
+      }
+    };
 
-    const catalogHandler = (e)=>{
-        e.stopPropagation();   
-        setShowCatalog(!showCatalog);
-    }
+    fetchSublinks();
+
+    setTimeout(() => {
+      if (!JSON.parse(localStorage.getItem("user"))) {
+        localStorage.removeItem("token");
+        navigate("/");
+      }
+    }, 1000);
+
+    dispatch(
+      setToken(
+        localStorage.getItem("token")
+          ? JSON.parse(localStorage.getItem("token"))
+          : null
+      )
+    );
+
+    dispatch(setUser({ ...JSON.parse(localStorage.getItem("user")) }));
+  }, []);
+
+  const handleLogout = () => {
+    dispatch(logout(navigate));
+  };
+
+  const catalogHandler = (e) => {
+    e.stopPropagation();
+    setShowCatalog(!showCatalog);
+  };
+
+  const navLinkClass = ({ isActive }) =>
+    isActive
+      ? "text-purple-400 font-bold underline decoration-[1px]"
+      : "text-white hover:text-blue-400 transition-all duration-150 cursor-pointer";
 
   return (
     <div className="flex h-[6.7vh] items-center border-b-[1px] justify-evenly bg-gray-900 border-gray-600">
       <div className="flex w-full md:max-w-[1200px] pr-4 items-center justify-between ">
-
-        {/* logo  */}
+        {/* Logo */}
         <Link to="/">
-            <img src={logo} alt="logo" className="w-[200px] md:w-[230px] bg-blend-color "/>
+          <img src={logo} alt="logo" className="w-[200px] md:w-[230px]" />
         </Link>
 
-        <button className="text-white md:hidden text-2xl"
-        onClick={(e)=>{
-            setIsMenuOpen(!isMenuOpen)
-        }}
+        {/* Mobile Menu Button */}
+        <button
+          className="text-white md:hidden text-2xl"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-            ☰
+          ☰
         </button>
 
-        {/* nav bars  */}
-        <nav className={`md:static absolute top-[6.7vh] left-0 w-full bg-gray-800 md:bg-transparent transition-all duration-300 ease-in-out z-50 ${isMenuOpen ? "block" : "hidden"} md:block`}>
-            <ul className="flex md:flex-row flex-col text-end gap-6 md:gap-10 md:p-0 p-4 items-center justify-center ">
-                {
-                    NavbarLinks.map((link, index)=>(
-                        <li key={index}>
-                            {
-                                link.title === "Catalog" ? (
-                                    <div 
-                                        className="relative text-white hover:text-blue-400 transition-all duration-150 cursor-pointer flex flex-row items-center gap-1"
-                                        onClick={catalogHandler}
-                                        ref={ref}
-                                    >
-                                        Catalog {<IoIosArrowDown />}
+        {/* Navigation Menu */}
+        <nav
+          className={`md:static z-1000000 absolute top-[6.7vh] left-0 w-full bg-gray-800 md:bg-transparent transition-all duration-300 ease-in-out z-50 ${
+            isMenuOpen ? "block" : "hidden"
+          } md:block`}
+        >
+          <ul className="flex md:flex-row flex-col text-end gap-6 md:gap-10 md:p-0 p-4 items-center justify-center">
+            {/* Top nav links */}
+            {NavbarLinks.map((link, index) => (
+              <li key={index}>
+                {link.title === "Catalog" ? (
+                  <div
+                    className="relative text-white hover:text-blue-400 cursor-pointer flex items-center gap-1"
+                    onClick={catalogHandler}
+                  >
+                    Catalog <IoIosArrowDown />
+                    {showCatalog && (
+                      <div className="absolute left-[10vw] md:left-0 top-full md:mt-2 w-[40vw] md:w-[200px] bg-gray-700 text-white shadow-md rounded-md transition-opacity duration-200 z-50">
+                        <ul className="flex flex-col">
+                          {subLinks.length > 0 ? (
+                            subLinks.map((ele) => (
+                              <li key={ele._id}>
+                                <Link
+                                  to={`/catalog/${ele.name}`}
+                                  state={{ id: ele._id }}
+                                  className="block px-4 py-2 hover:bg-gray-600 hover:text-blue-400 transition-all duration-150 text-sm text-gray-300"
+                                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                >
+                                  {ele.name}
+                                </Link>
+                              </li>
+                            ))
+                          ) : (
+                            <li className="px-4 py-3 text-sm text-gray-400">
+                              Loading...
+                            </li>
+                          )}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <NavLink to={link.path} className={navLinkClass}>
+                    {link.title}
+                  </NavLink>
+                )}
+              </li>
+            ))}
 
-                                        {/* dropdown  render only when showCatalog === true*/}
-                                        {
-                                            showCatalog && (
-                                                <div className="absolute left-[10vw] md:left-0 top-full md:mt-2 w-[40vw] md:w-[200px] bg-gray-700 text-white shadow-md rounded-md transition-opacity duration-200 z-50">
-                                                    <ul className="flex flex-col">
-                                                        {subLinks.length > 0?(
-                                                            subLinks.map((ele, index)=>(
-                                                                <li key={index}> 
-                                                                    <Link to={`/catalog/${ele.name}`} className="text-start block px-4 py-2 hover:bg-gray-600 hover:text-blue-400 hover:rounded-lg transition-all duration-150 text-sm text-gray-300">
-                                                                        {ele.name}
-                                                                    </Link>
-                                                                </li>
-                                                            ))
-                                                        ):(
-                                                            <li className="px-4 py-3 text-sm text-gray-400">
-                                                                Loading...
-                                                            </li>
-                                                        )}
-                                                    </ul>
-                                                </div>
-                                            )
-                                        }
-                                        
-                                    </div>
-                                ):(
-                                    <NavLink 
-                                        to={link?.path}
-                                        className={({isActive})=>
-                                            isActive ?
-                                            "text-purple-400 font-bold underline decoration-[1px]" :
-                                            "text-white hover:text-blue-400 transition-all duration-150 cursor-pointer"
-                                        }
-                                        onClick={oneTimeClick}
-                                    >
-                                        <p >
-                                            {link.title}
-                                        </p>
-                                    </NavLink>
-                                )
-                            }
-                        </li>
-                    ))
-                }
-                <NavLink 
-                    to="/login" 
-                    className={`text-white  md:hidden`} 
-                    onClick={oneTimeClick}
-                >
-                    LogIn
+            {/* Mobile view dashboard links */}
+            {user && (
+              <>
+                <NavLink to="/dashboard/my-profile" className="text-white md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                  <FaUser className="inline mr-1" /> My Profile
                 </NavLink>
-                <NavLink 
-                    to="/signup" 
-                    className={`text-white md:hidden`} 
-                    onClick={oneTimeClick}
-                >
-                    SignUp
+                {user.accountType === "Instructor" ? (
+                  <>
+                    <NavLink to="/dashboard/course-list" className="text-white md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                      <FaBook className="inline mr-1" /> My Courses
+                    </NavLink>
+                    <NavLink to="/dashboard/add-course" className="text-white md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                      <FaPlus className="inline mr-1" /> Add Course
+                    </NavLink>
+                  </>
+                ) : (
+                  <NavLink to="/dashboard/wishlist" className="text-white md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                    <FaHeart className="inline text-pink-500 mr-1" /> Wishlist
+                  </NavLink>
+                )}
+                <NavLink to="/dashboard/settings" className="text-white md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                  <FaCog className="inline mr-1" /> Settings
                 </NavLink>
-            </ul>
+                <button
+                  onClick={handleLogout}
+                  className="text-red-400 hover:text-white md:hidden"
+                >
+                  <FaSignOutAlt className="inline mr-1" /> Logout
+                </button>
+              </>
+            )}
+
+            {/* Auth Links for mobile */}
+            {!user && (
+              <>
+                <NavLink to="/login" className="text-white md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                  LogIn
+                </NavLink>
+                <NavLink to="/signup" className="text-white md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                  SignUp
+                </NavLink>
+              </>
+            )}
+          </ul>
         </nav>
 
-        {/* login/signup/dashboard  */}
-        <div className={`md:flex items-center gap-x-3 hidden text-white`}>
-                {
-                    user && user?.accountType != "Instructor" && (
-                        <Link to="/dashboard/cart" className="relative">
-                            <IoCartOutline />
-                            {
-                                totalItem > 0 && (
-                                    <span>
-                                        {totalItem}
-                                    </span>
-                                )
-                            }
-                        </Link>
-                    )
-                }
-                {
-                    token === null && (
-                        <Link to="/login">
-                            <button className="text-gray-400 border border-gray-500 py-1 px-2 rounded-lg cursor-pointer transition-all duration-300 hover:text-white">
-                                LogIn
-                            </button>
-                        </Link>
-                    )
-                }
-                {
-                    token === null && (
-                        <Link to="/Signup">
-                            <button className="text-gray-400 border border-gray-500 py-1 px-2 rounded-lg cursor-pointer transition-all duration-300 hover:text-white">
-                                SignUp
-                            </button>
-                        </Link>
-                    )
-                }
-                {
-                    token !== null 
-                    && <ProfileDropDown/>
-                }
-
+        {/* Desktop Right Side Icons */}
+        <div className="md:flex items-center gap-x-3 hidden text-white">
+          
+          {!token && (
+            <>
+              <Link to="/login">
+                <button className="text-gray-400 border border-gray-500 py-1 px-2 rounded-lg hover:text-white">
+                  LogIn
+                </button>
+              </Link>
+              <Link to="/signup">
+                <button className="text-gray-400 border border-gray-500 py-1 px-2 rounded-lg hover:text-white">
+                  SignUp
+                </button>
+              </Link>
+            </>
+          )}
+          {token && <div ref={ref}><ProfileDropDown /></div>}
         </div>
-
-
-
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

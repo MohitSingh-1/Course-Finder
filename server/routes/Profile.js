@@ -14,6 +14,6 @@ const {
 // delete user account
 router.delete("/deleteProfile", auth, deleteAccount);
 router.post("/updateProfile", auth, updateProfile);
-router.get("/getUserDetails", auth, getAllUserDetails);
+router.get("/getUserDetails/:id", auth, getAllUserDetails);
 
 module.exports = router;

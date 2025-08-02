@@ -4,6 +4,7 @@ const userRoutes = require("./routes/User");
 const contactRoutes = require("./routes/Contact");
 const courseRoutes = require("./routes/Course");
 const profileRoutes = require("./routes/Profile");
+const wishlist = require("./routes/wishlist");
 const database = require("./config/database");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
@@ -24,10 +25,12 @@ app.use(express.json());    // middleware for parsing the data into json
 // frontend at 3000 port number will be entertained
 app.use(
 	cors({
-		origin:"https://course-finder-nu.vercel.app",
+		// origin:"https://course-finder-nu.vercel.app/",
+		origin:"http://localhost:5173",
 		credentials:true,
 	})
 );
+
 app.use(
 	fileUpload({
 		useTempFiles:true,
@@ -40,6 +43,7 @@ app.use("/api/v1/auth",userRoutes);
 app.use("/api/v1/course", courseRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/reach", contactRoutes);
+app.use("/api/v1/wishlist", wishlist);
 
 // default routes
 app.get("/",(req, res)=>{
