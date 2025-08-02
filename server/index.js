@@ -25,7 +25,7 @@ app.use(express.json());    // middleware for parsing the data into json
 // frontend at 3000 port number will be entertained
 app.use(
 	cors({
-		origin:"https://course-finder-nu.vercel.app/",
+		origin:"https://course-finder-nu.vercel.app",
 		// origin:"http://localhost:5173",
 		credentials:true,
 	})
