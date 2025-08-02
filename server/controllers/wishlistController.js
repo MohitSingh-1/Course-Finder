@@ -1,5 +1,5 @@
 const Course = require("../models/Course");
-const Wishlist = require("../models/Wishlist");
+const Wishlist = require("../models/WishList");
 
 
 // Add a course to the wishlist
