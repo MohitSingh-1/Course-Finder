@@ -55,8 +55,9 @@ const Navbar = () => {
       )
     );
 
-    dispatch(setUser({ ...JSON.parse(localStorage.getItem("user")) }));
+    dispatch(setUser(JSON.parse(localStorage.getItem("user"))));
   }, []);
+
 
   const handleLogout = () => {
     dispatch(logout(navigate));
