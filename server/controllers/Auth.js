@@ -4,7 +4,6 @@ const OTP = require("../models/OTP");
 const otpGenerator = require("otp-generator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { toast } = require("react-toastify");
 require("dotenv").config();
 
 
