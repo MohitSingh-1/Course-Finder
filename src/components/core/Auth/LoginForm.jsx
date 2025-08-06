@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import {Link, useNavigate} from "react-router-dom"
-import CTAButton from "../HomePage/Button"
+import CTAButton from "../ShortHands/Button"
 import { useDispatch } from "react-redux"
 import { login } from '../../../services/operations/authAPI'
 import { toast } from 'react-toastify'
@@ -29,7 +29,7 @@ const LoginForm = () => {
 
 
   return (
-    <div className="bg-[#000814] p-4">
+    <div className="bg-[#000814] p-4 ">
       <form onSubmit={handleOnSubmit}>
         <label className="w-[100%]">
             <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-white ">
@@ -50,7 +50,7 @@ const LoginForm = () => {
         </label>
 
 
-        <label className="w-full ">
+        <label className="w-full">
             <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-white">
                 Password<sup className="text-pink-500">*</sup>
             </p> 
@@ -77,14 +77,21 @@ const LoginForm = () => {
                     )}
                 </div>
             </div>
+        </label>
 
-        
+
+        <div className=' flex flex-row justify-between '>
             <Link to="/forget-password">
-                <p className="mt-1 ml-auto max-w-[100px] text-xs text-blue-700 ">
+                <p className=" ml-auto text-md text-blue-700 hover:underline ">
                     Forget Password
                 </p>
             </Link>
-        </label>
+            <Link to="/signup" >
+                <p className=" ml-auto text-md text-blue-700 hover:underline">
+                    Sign up
+                </p>
+            </Link>
+        </div>
 
         <button 
             type="submit"

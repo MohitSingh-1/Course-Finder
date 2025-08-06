@@ -1,11 +1,11 @@
 import React from "react";
 import { HiArrowRight } from "react-icons/hi";
 import {Link} from "react-router-dom"
-import HighLightText from "../components/core/HomePage/HighLightText";
-import CTAButton from "../components/core/HomePage/Button"
+import HighLightText from "../components/core/ShortHands/HighLightText";
+import CTAButton from "../components/core/ShortHands/Button"
 import bannerVideo from "../assets/Images/banner.mp4"
 import instructorImage from "../assets/Images/instructor2.png"
-import CodeBlocks from "../components/core/HomePage/CodeBlocks"
+import CodeBlocks from "../components/core/ShortHands/CodeBlocks"
 import Footer from "../components/common/Footer";
 
 
@@ -18,7 +18,7 @@ const Home = () => {
       <section className="flex flex-col text-center ">
         {/* upper div button */}
         <div className="relative mx-auto flex flex-col w-11/12 items-center  text-white justify-between ">
-          <Link to={"/signup"} state={{ role: "Instructor" }}>
+          {/* <Link to={"/signup"} state={{ role: "Instructor" }}>
             <div
               className="group mt-16 p-1 mx-auto rounded-full bg-gray-700 font-bold text-gray-300 
                                 transition-all duration-200 hover:scale-95 w-fit"
@@ -28,9 +28,9 @@ const Home = () => {
                 <HiArrowRight />
               </div>
             </div>
-          </Link>
+          </Link> */}
 
-          <div className="text-center text-4xl font-semibold mt-7">
+          <div className="text-center text-4xl font-semibold mt-20">
             Empower Your Future with
             <HighLightText text={"Coding Skills"} />
           </div>
@@ -43,7 +43,7 @@ const Home = () => {
           </div>
 
           <div className="flex flex-row gap-[5vw] md:gap-20 mt-8">
-            <CTAButton color={"yellow"} linkto={"/aboutUs"}>
+            <CTAButton color={"yellow"} linkto={"/about"}>
               Learn More
             </CTAButton>
             <CTAButton color={"blue"} linkto={"/login"}>
@@ -137,11 +137,6 @@ const Home = () => {
         </div>
         
       </section>
-
-      {/* Reviws from Other Learner */}
-      {/* <h1 className="text-center text-4xl font-semibold mt-8 text-white mb-20">
-        Reviews from other learners
-      </h1> */}
 
 
       {/* Footer */}

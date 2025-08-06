@@ -108,17 +108,17 @@ const Courses = () => {
                   {token ? (
                     isWishList.length > 0 ? (
                       <div
-                        className="cor_wish"
+                        className="cor_wish cursor-pointer"
                         onClick={() => removeWishList(val)}
                       >
-                        <FaHeart size={24} className="text-pink-500" />
+                        <FaHeart size={24} className="text-pink-500 hover:scale-110" />
                       </div>
                     ) : (
                       <div
-                        className="cor_wish"
+                        className="cor_wish cursor-pointer"
                         onClick={() => addWishList(val)}
                       >
-                        <FaHeart size={24} className="text-gray-500" />
+                        <FaHeart size={24} className="text-gray-500 hover:scale-110" />
                       </div>
                     )
                   ) : (

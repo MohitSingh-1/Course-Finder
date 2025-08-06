@@ -209,7 +209,7 @@ exports.loginHandler = async (req,res)=>{
         if(!user){
             return res.status(400).json({
                 success:false,
-                message:"Invalid Username or password"
+                message:"Invalid credentials"
             })
         }
 
@@ -222,7 +222,7 @@ exports.loginHandler = async (req,res)=>{
             return res.status(401).json(
                 {
                     success:false,
-                    message:"Password does not match"
+                    message:"Invalid credentials"
                 }
             )
         }

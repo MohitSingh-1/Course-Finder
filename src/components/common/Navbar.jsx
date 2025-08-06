@@ -109,18 +109,22 @@ const Navbar = () => {
                       <div className="absolute left-[10vw] md:left-0 top-full md:mt-2 w-[40vw] md:w-[200px] bg-gray-700 text-white shadow-md rounded-md transition-opacity duration-200 z-50">
                         <ul className="flex flex-col">
                           {subLinks.length > 0 ? (
-                            subLinks.map((ele) => (
-                              <li key={ele._id}>
-                                <Link
-                                  to={`/catalog/${ele.name}`}
-                                  state={{ id: ele._id }}
-                                  className="block px-4 py-2 hover:bg-gray-600 hover:text-blue-400 transition-all duration-150 text-sm text-gray-300"
-                                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                >
-                                  {ele.name}
+                              user ? subLinks.map((ele) => (
+                                <li key={ele._id}>
+                                  <Link
+                                    to={`/catalog/${ele.name}`}
+                                    state={{ id: ele._id }}
+                                    className="block px-4 py-2 hover:bg-gray-600 hover:text-blue-400 transition-all duration-150 text-sm text-gray-300"
+                                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                  >
+                                    {ele.name}
+                                  </Link>
+                                </li>
+                              )) : (
+                                <Link to="/login" className="px-4 py-3 text-sm text-white">
+                                  Login first...
                                 </Link>
-                              </li>
-                            ))
+                              )
                           ) : (
                             <li className="px-4 py-3 text-sm text-gray-400">
                               Loading...
