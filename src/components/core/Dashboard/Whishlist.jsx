@@ -63,7 +63,7 @@ const Whishlist = () => {
               let isWishList = wishList.filter((ele) => ele._id == val._id);
               return (
                 <div className="course_main">
-                  <div className="cor_wish" onClick={() => removeWishList(val)}>
+                  <div className="cor_wish cursor-pointer" onClick={() => removeWishList(val)}>
                     <FaHeart size={24} className="text-pink-500" />
                   </div>
 

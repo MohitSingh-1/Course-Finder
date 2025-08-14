@@ -21,7 +21,7 @@ const {
 export function sendOtp(email, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
-    dispatch(setLoading(true))
+    // dispatch(setLoading(true))
     try {
       const response = await apiConnector("POST", SENDOTP_API, {
         email,
@@ -41,7 +41,7 @@ export function sendOtp(email, navigate) {
       console.log("SENDOTP API ERROR............", error)
       toast.error("Could Not Send OTP")
     }
-    dispatch(setLoading(false))
+    // dispatch(setLoading(false))
     toast.dismiss(toastId)
   }
 }
@@ -90,7 +90,7 @@ export function signUp(
 export function login(email, password, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
-    dispatch(setLoading(true))
+    // dispatch(setLoading(true))
     try {
       const response = await apiConnector("POST", LOGIN_API, {
         email,
@@ -100,7 +100,7 @@ export function login(email, password, navigate) {
       console.log("LOGIN API RESPONSE............", response)
 
       if (!response.data.success) {
-        throw new Error(response.data.message)
+        throw new Error(response.data.message);
       }
       toast.success("Login Successful")
 
@@ -117,10 +117,12 @@ export function login(email, password, navigate) {
       navigate("/dashboard/my-profile")
     } catch (error) {
       console.log("LOGIN API ERROR............", error)
-      toast.error("Login Failed")
+      const errMsg = error?.response?.data?.message || "Login failed. Please try again.";
+      toast.error(errMsg);
+    }finally{
+        // dispatch(setLoading(false));
+        toast.dismiss(toastId);
     }
-    dispatch(setLoading(false))
-    toast.dismiss(toastId)
   }
 }
 

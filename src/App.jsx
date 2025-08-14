@@ -2,8 +2,6 @@ import { useState } from "react";
 import "./index.css";
 import {Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
-import LoginForm from "./components/core/Auth/LoginForm";
-import Template from "./components/core/Auth/Template";
 import Login from "./pages/Login";
 import Navbar from "./components/common/Navbar";
 import Signup from "./pages/Signup"
@@ -20,6 +18,7 @@ import Settings from "./components/core/Dashboard/Settings"
 import CourseList from "./components/core/Dashboard/CourseList";
 import AddCourses from "./components/core/Dashboard/AddCourses";
 import Courses from "./components/core/Dashboard/Courses";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 
 function App() {
@@ -43,6 +42,8 @@ function App() {
           <Route path="/dashboard/course-list" element={<CourseList/>}/>
           <Route path="/dashboard/add-course" element={<AddCourses/>}/>
           <Route path="/catalog/:name" element={<Courses />}/>
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+
           {/* /course-list  add-course*/}
           <Route path="*" element={<Error/>}/>
 

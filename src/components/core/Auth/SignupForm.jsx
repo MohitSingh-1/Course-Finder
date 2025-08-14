@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { setSignupData } from "../../../slices/authSlice";
 import { sendOtp } from "../../../services/operations/authAPI";
 import { useDispatch } from "react-redux";
+import { FaLongArrowAltLeft } from "react-icons/fa";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -190,9 +191,16 @@ const SignupForm = () => {
           </label>
         </div>
 
+      <Link to="/login">
+        <div className="ml-auto w-full flex justify-end items-center gap-2 text-md text-blue-700 hover:underline">
+          <FaLongArrowAltLeft />
+          <span>Login</span>
+        </div>
+      </Link>
+
         <button
           type="submit"
-          className="mt-6 rounded-[8px] bg-yellow-500 py-[8px] w-full cursor-pointer font-medium text-gray-900"
+          className="mt-4 rounded-[8px] bg-yellow-500 py-[8px] w-full cursor-pointer font-medium text-gray-900"
         >
           SignUp
         </button>

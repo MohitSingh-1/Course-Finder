@@ -13,6 +13,7 @@ const VerifyEmail = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [otp, setOtp] = useState('');
+    const email = signupData.email;
 
     useEffect(()=>{
         if(!signupData){
@@ -68,12 +69,12 @@ const VerifyEmail = () => {
                             </button>
                         </form>
                         <div className="flex flex-row justify-between items-center ">
-                            <Link to="/login" className=" flex flex-row items-center gap-2 pt-3">
+                            <Link to="/login" className=" flex flex-row items-center gap-2 pt-3 hover:underline">
                                 <FaArrowLeftLong/>
                                 <p>Back to Login</p>
                             </Link>
                             <button 
-                            className="cursor-pointer flex flex-row gap-2 items-center pt-3"
+                            className="cursor-pointer flex flex-row gap-2 items-center pt-3 hover:underline"
                             onClick={resendOtpHandler}
                             >
                                 <FaClockRotateLeft />
