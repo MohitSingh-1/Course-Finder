@@ -19,6 +19,7 @@ import CourseList from "./components/core/Dashboard/CourseList";
 import AddCourses from "./components/core/Dashboard/AddCourses";
 import Courses from "./components/core/Dashboard/Courses";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Footer from "./components/common/Footer";
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
 
         </Routes>
       </div>
+      <Footer/>
     </>
   );
 }

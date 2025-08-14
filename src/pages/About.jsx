@@ -91,8 +91,6 @@ const About = () => {
             </div>
         </section>
         </div>
-        {/* Footer  */}
-        <Footer/>
     </div>
   );
 };

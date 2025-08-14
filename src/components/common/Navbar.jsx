@@ -75,7 +75,7 @@ const Navbar = () => {
 
   return (
     <div className="flex h-16 items-center border-b-[1px] justify-evenly bg-gray-900 border-gray-600">
-      <div className="flex w-full md:max-w-[1300px] pr-4 items-center justify-between ">
+      <div className="flex w-full  md:max-w-[1340px] pr-4 items-center justify-between ">
         {/* Logo */}
         <Link to="/">
           <img src={logo} alt="logo" className="w-[200px] md:w-[230px]" />
@@ -91,7 +91,7 @@ const Navbar = () => {
 
         {/* Navigation Menu */}
         <nav
-          className={`md:static z-10000 absolute top-[6.7vh] left-0  bg-gray-800 md:bg-transparent transition-all duration-300 ease-in-out z-50 ${
+          className={`md:static z-10000  md:w-auto w-[40%] absolute top-[6.7vh] right-8 bg-gray-800 md:bg-transparent transition-all duration-300 ease-in-out z-50 ${
             isMenuOpen ? "block" : "hidden"
           } md:block`}
         >
@@ -106,7 +106,7 @@ const Navbar = () => {
                   >
                     Catalog <IoIosArrowDown />
                     {showCatalog && (
-                      <div className="absolute left-[10vw] md:left-0 top-full md:mt-2 w-[40vw] md:w-[200px] bg-gray-700 text-white shadow-md rounded-md transition-opacity duration-200 z-50">
+                      <div className="absolute right-0 md:left-0 md:right-auto top-full md:mt-2 w-[40vw] md:w-[200px] bg-gray-700 text-white shadow-md rounded-md transition-opacity duration-200 z-50">
                         <ul className="flex flex-col">
                           {subLinks.length > 0 ? (
                               user ? subLinks.map((ele) => (

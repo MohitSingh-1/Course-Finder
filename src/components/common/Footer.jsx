@@ -5,28 +5,35 @@ import Logo from "../../assets/Logo/logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-400 text-sm px-4 py-6">
-      <div className="max-w-7xl mx-20  flex flex-col lg:flex-row justify-between items-center gap-6">
+    <footer className="bg-gray-900 text-gray-400 text-sm px-4 py-8">
+      <div className="max-w-7xl  mx-auto grid md:flex md:flex-row md:justify-around  gap-8 md:grid-cols-3 md:items-start md:px-8">
         
-        {/* Logo + Social Icons */}
-        <div className="flex w-1/3 flex-col items-center lg:items-center gap-1  ">
-          <img src={Logo} alt="logo" className="h-10 object-contain" />
-
-          <div className="text-gray-400 text-center">
+        {/* Logo + Tagline */}
+        <div className="flex  flex-col items-center md:items-start text-center md:text-left">
+          <img
+            src={Logo}
+            alt="logo"
+            className="h-10 md:ml-14  object-contain"
+          />
+          <p className="mt-2 text-gray-400">
             Empowering learners to discover the best courses.
-          </div>
+          </p>
         </div>
 
         {/* Links */}
-        <div className="flex flex-wrap gap-6 justify-center w-1/3">
-          <Link to="/privacy-policy" className="hover:text-purple-400 transition">Privacy Policy</Link>
-          <Link to="/terms" className="hover:text-purple-400 transition">Terms</Link>
-          <Link to="/contact" className="hover:text-purple-400 transition">Contact</Link>
-          <Link to="/about" className="hover:text-purple-400 transition">About</Link>
+        <div className="flex flex-col items-center md:items-start">
+          <h3 className="font-semibold mb-2 text-white md:hidden">Quick Links</h3>
+          <div className="space-y-1 flex flex-col md:flex-row md:space-y-0 md:gap-6 text-center md:text-left">
+            <Link to="/privacy-policy" className="hover:text-purple-400 transition">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-purple-400 transition">Terms</Link>
+            <Link to="/contact" className="hover:text-purple-400 transition">Contact</Link>
+            <Link to="/about" className="hover:text-purple-400 transition">About</Link>
+          </div>
         </div>
 
-        <div>
-          <p className="text-lg pb-2 text-gray-400 hover:underline">Follow Us</p>
+        {/* Social Links */}
+        <div className="flex flex-col items-center md:items-start">
+          <h3 className="font-semibold mb-2 text-white">Follow Us</h3>
           <div className="flex gap-4 text-2xl">
             <a href="https://www.linkedin.com/in/mohit-singh-mzp/" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400">
               <FaLinkedin />
@@ -42,14 +49,14 @@ const Footer = () => {
             </a>
           </div>
         </div>
-
       </div>
-      <hr className="text-gray-800 m-8"/>
-      <div>
-        {/* Signature */}
-        <div className="text-center text-[14px] text-gray-500 pb-4">
-          © 2025 CourseFinder. All rights reserved.
-        </div>
+
+      {/* Divider */}
+      <hr className="text-gray-800 my-6" />
+
+      {/* Bottom Bar */}
+      <div className="text-center text-xs text-gray-500">
+        © 2025 CourseFinder. All rights reserved.
       </div>
     </footer>
   );
