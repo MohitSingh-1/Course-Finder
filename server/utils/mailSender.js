@@ -11,13 +11,13 @@ const mailSender = async(email, title, body)=>{
         })
 
         let info = await transporter.sendMail({
-            from:"CourseFinder || by - Mohit Singh",
+            from:`"CourseFinder" <your_email@example.com>`,
             to:`${email}`,
             subject:`${title}`,
             html:`${body}`,
         })
 
-        console.log(info);
+        // console.log(info);
         return info;
 
 
