@@ -46,12 +46,6 @@ const userSchema = new mongoose.Schema({
     resetPasswordExpires:{
         type:Date,
     },
-    reviews:[
-        {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"RatingAndReviews"
-        }
-    ]
 })
 
 module.exports = mongoose.model("User",userSchema);

@@ -60,9 +60,9 @@ const Sidebar = () => {
         </NavLink>
         <button
           onClick={() => setShowModal(true)}
-          className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-gray-300 hover:text-red-400 transition-all duration-200"
+          className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-gray-300 hover:text-red-400 transition-all duration-200 cursor-pointer "
         >
-          <FaSignOutAlt className="text-red-500" /> Logout
+          <FaSignOutAlt className="text-red-500 " /> Logout
         </button>
 
         {showModel && (

@@ -15,11 +15,11 @@ import Dashboard from "./pages/Dashboard";
 import MyProfile from "./components/core/Dashboard/MyProfile"
 import Whishlist from "./components/core/Dashboard/Whishlist";
 import Settings from "./components/core/Dashboard/Settings"
-import CourseList from "./components/core/Dashboard/CourseList";
 import AddCourses from "./components/core/Dashboard/AddCourses";
 import Courses from "./components/core/Dashboard/Courses";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Footer from "./components/common/Footer";
+import CourseList from "./components/core/Dashboard/CourseList";
 
 
 function App() {
@@ -47,8 +47,6 @@ function App() {
 
           {/* /course-list  add-course*/}
           <Route path="*" element={<Error/>}/>
-
-
 
         </Routes>
       </div>

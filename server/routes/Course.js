@@ -19,18 +19,18 @@ const {
 } = require("../controllers/Category");
 
 // section controller import
-const {
-    createSection,
-    updateSection,
-    deleteSection,
-} = require("../controllers/Section");
+// const {
+//     createSection,
+//     updateSection,
+//     deleteSection,
+// } = require("../../../extra_for_future/Controllers/Section");
 
 // rating controller import
-const {
-    createRating, 
-    getAllRating,
-    getAverageRating,
-} = require("../controllers/RatingAndReview");
+// const {
+//     createRating, 
+//     getAllRating,
+//     getAverageRating,
+// } = require("../controllers/RatingAndReview");
 
 // middlewares import
 const {auth, isStudent, isAdmin, isInstructor} = require("../middlewares/auth");
@@ -44,11 +44,11 @@ const {auth, isStudent, isAdmin, isInstructor} = require("../middlewares/auth");
 // create course only by instructor
 router.post("/createCourse", auth, isInstructor, createCourse);
 // add a section to a course
-router.post("/addSection", auth, isInstructor, createSection);
-// update a section
-router.post("/updateSection", auth, isInstructor, updateSection);
-// delete a section
-router.post("/deleteSection", auth, isInstructor, deleteSection);
+// router.post("/addSection", auth, isInstructor, createSection);
+// // update a section
+// router.post("/updateSection", auth, isInstructor, updateSection);
+// // delete a section
+// router.post("/deleteSection", auth, isInstructor, deleteSection);
 
 // get All registered courses
 router.get("/getAllCourses", getAllCourses);
@@ -72,17 +72,5 @@ router.get("/getAllCategories", getAllCategories);
 router.get("/getAllCoursesByInstructorId/:id", getAllCoursesByInstructorId);
 // get category page details for page category of frontend
 router.get("/getCategoryPageDetails", categoryPageDetails);
-
-
-// ********************************************************************************************************
-//                                      Rating and Review
-// ********************************************************************************************************
-
-// create a new rating and review
-router.post("/createRating", auth, isStudent, createRating);
-// get average ratings of a course
-router.get("/getAverageRating", getAverageRating);
-// get all the rating -> for the home page -> show all the best ratings
-router.get("/getAllRatings", getAllRating);
 
 module.exports = router;

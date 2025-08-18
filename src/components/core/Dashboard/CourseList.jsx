@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "./Sidebar";
+// import Sidebar from "../components/core/Dashboard/Sidebar";
 import { useSelector } from "react-redux";
 import { apiConnector } from "../../../services/apiConnector";
 import { courseEndpoints } from "../../../services/apis";
@@ -40,7 +40,7 @@ const CourseList = () => {
   }, [user]);
   return (
     <div className="flex flex-row">
-      <Sidebar />
+      {/* <Sidebar /> */}
       <div className="w-[100%] overflow-y-auto" style={{ height: height }}>
         <div
           style={{ height: height }}

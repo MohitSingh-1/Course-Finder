@@ -132,7 +132,6 @@ exports.getAllCourses = async (req, res) => {
       .populate("category", "name")
       .populate({
         path: "courseContent",
-        populate: { path: "subSection" },
       });
 
     // If search is provided, filter manually (no instructor check)

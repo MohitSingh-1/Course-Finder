@@ -20,10 +20,6 @@ const profileSchema = new mongoose.Schema({
         //     message: props => `${props.value} is not a valid 10-digit phone number!`
         // }
     },
-    profession:{
-        type:String,
-        enum:["none","B","C","D"],
-    }
 })
 
 module.exports = mongoose.model("Profile",profileSchema);

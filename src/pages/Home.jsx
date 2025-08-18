@@ -1,15 +1,31 @@
 import React from "react";
 import { HiArrowRight } from "react-icons/hi";
-import {Link} from "react-router-dom"
+import {Link, Navigate, useNavigate} from "react-router-dom"
 import HighLightText from "../components/core/ShortHands/HighLightText";
 import CTAButton from "../components/core/ShortHands/Button"
 import bannerVideo from "../assets/Images/banner.mp4"
 import instructorImage from "../assets/Images/instructor2.png"
 import CodeBlocks from "../components/core/ShortHands/CodeBlocks"
-import Footer from "../components/common/Footer";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 
 const Home = () => {
+
+  const {user}=useSelector((state)=>state.profile);
+  const navigate = useNavigate();
+
+  const handleRegisterCourse = ()=>{
+    if(user){
+        if(user.accountType==="Student"){
+          toast.error("Login as Instructor first");
+        }else if(user.accountType==="Instructor"){
+          navigate('/dashboard/add-course');
+        }
+    }else{
+      navigate('/login');
+    }
+  }
 
 
   return (
@@ -18,17 +34,6 @@ const Home = () => {
       <section className="flex flex-col text-center ">
         {/* upper div button */}
         <div className="relative mx-auto flex flex-col w-11/12 items-center  text-white justify-between ">
-          {/* <Link to={"/signup"} state={{ role: "Instructor" }}>
-            <div
-              className="group mt-16 p-1 mx-auto rounded-full bg-gray-700 font-bold text-gray-300 
-                                transition-all duration-200 hover:scale-95 w-fit"
-            >
-              <div className="flex flex-row items-center gap-2 rounded-full px-10 py-[5px] group-hover:bg-gray-800 ">
-                <p>Become an Instructor</p>
-                <HiArrowRight />
-              </div>
-            </div>
-          </Link> */}
 
           <div className="text-center text-4xl font-semibold mt-20">
             Empower Your Future with
@@ -46,8 +51,8 @@ const Home = () => {
             <CTAButton color={"yellow"} linkto={"/about"}>
               Learn More
             </CTAButton>
-            <CTAButton color={"blue"} linkto={"/login"}>
-              Explore courses
+            <CTAButton color={"blue"} linkto={"/contact"}>
+              Contact Us
             </CTAButton>
           </div>
 
@@ -72,21 +77,8 @@ const Home = () => {
                   <HighLightText text={" learning journey "}/>with the best courses.
                 </div>
               } 
-              subheading={"Discover thousands of courses from top platforms in one place. Compare prices, content, duration, and reviews — and pick the one that suits your goals best."} 
-              ctabtn1={
-                {
-                  text:"Discover Now",
-                  color:"yellow",
-                  linkto:"/login"
-                }
-              } 
-              ctabtn2={
-                {
-                  text:"See Reviews",
-                  color:"black",
-                  linkto:"/"
-                }
-              } 
+              subheading={"Discover thousands of courses from top platforms in one place.Easily compare prices, content, duration, and reviews side by side — so you don’t waste hours searching around. Whether you’re looking to upskill for your career, learn something new for fun, or find the most value for your money, we help you pick the course that truly fits your goals."} 
+
               code={`<!DOCTYPE html>\n<html lang="en">\n<head>\n<title>My Awesome Page</title>\n</head>\n<body>\n<h1><a href="/">Welcome</a></h1>\n<a href="/home">Home</a>\n<a href="/about">About</a>\n</body>\n`}
               bgGradient={<div className="codeblock1 absolute"></div>}
               codeColor={"text-yellow-400"}
@@ -125,8 +117,8 @@ const Home = () => {
             showcasing quality content — making it easier for learners to find
             the right course, faster.
           </div>
-          <div className=" md:w-fit w-fit relative mb-4 left-[35vw] md:static ">
-            <CTAButton color={"green"} linkto={"/signup"}>
+          <div className=" md:w-fit w-fit relative mb-4 left-[35vw] md:static " onClick={handleRegisterCourse}>
+            <CTAButton color={"green"}>
               <div className="flex flex-row items-center gap-2 ">
                 Register Course
                 <HiArrowRight/>

@@ -14,6 +14,8 @@ const Courses = () => {
   let categoryId = location?.state?.id;
 
   const [height, setHeight] = useState(window.innerHeight - 46);
+
+
   const fetchCourses = async () => {
     try {
       const result = await apiConnector(
@@ -25,6 +27,8 @@ const Courses = () => {
       console.log("Error while fetching the calatog list : ", err);
     }
   };
+
+
   useEffect(() => {
     fetchCourses();
   }, [categoryId]);
@@ -45,9 +49,12 @@ const Courses = () => {
       }
     }
   };
+  
   useEffect(() => {
     fetchWishList();
   }, []);
+
+
   const addWishList = async (value) => {
     let user = localStorage.getItem("user");
     if (user) {
@@ -93,9 +100,15 @@ const Courses = () => {
     }
   };
   return (
-    <div className="flex flex-row">
-      <Sidebar />
+    <div className="flex flex-row pb-10">
+     
       <div className="w-[100%] overflow-y-auto" style={{ height: height }}>
+
+          <div className="h-[20vh] pt-3 px-2 md:pt-10 md:px-[25vh] bg-gray-800 text-white">
+          Home / Catalog / <span className="text-yellow-500">{location?.state?.name}</span>
+          <p className="text-3xl font-bold py-3">{location?.state?.name}</p>
+          <p className=" font-bold pb-3">{location?.state?.description}</p>
+          </div>
         <div
           style={{ height: height }}
           className="text-white w-8/12 mx-auto py-10 flex flex-col gap-10"
@@ -146,6 +159,7 @@ const Courses = () => {
                         {val.courseDescription}
                       </p>
                       <p>{val.whatYouWillLearn}</p>
+                      <p className="pt-2 font-2xl text-green-300 font-bold">Rs. - {val.price}</p>
                     </div>
                   </a>
                 </div>

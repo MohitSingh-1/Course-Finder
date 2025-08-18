@@ -22,11 +22,11 @@ database.dbConnect();
 // middlewares
 app.use(cookieParser());
 app.use(express.json());    // middleware for parsing the data into json
-// frontend at 3000 port number will be entertained
+
 app.use(
 	cors({
 		origin:"https://course-finder-nu.vercel.app",
-		// origin:"http://localhost:5174",
+		// origin:"http://localhost:5173",
 		credentials:true,
 	})
 );
@@ -43,7 +43,7 @@ app.use("/api/v1/auth",userRoutes);
 app.use("/api/v1/course", courseRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/reach", contactRoutes);
-app.use("/api/v1/wishlist", wishlist);
+app.use("/api/v1/wishlist", wishlist); 
 
 // default routes
 app.get("/",(req, res)=>{

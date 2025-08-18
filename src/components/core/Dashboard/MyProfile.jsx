@@ -28,20 +28,22 @@ const MyProfile = () => {
   };
 
   const fetchCourses = async () => {
-   
-      try {
-        const result = await apiConnector(
-          "GET",
-          `${profileEndpoints.GET_PROFILE_API}/${user?._id}`
-        );
-        // console.log(result)
+   if(user?._id){
 
-        if(result.status==200){
+     try {
+       const result = await apiConnector(
+         "GET",
+         `${profileEndpoints.GET_PROFILE_API}/${user?._id}`
+       );
+       // console.log(result)
+
+       if(result.status==200){
 dispatch(setUser(result.data.userDetails))
-        }
-      } catch (err) {
-        console.log("Error while fetching the calatog list : ", err);
-      }
+       }
+     } catch (err) {
+       console.log("Error while fetching the calatog list : ", err);
+     }
+   }
     
   };
   useEffect(() => {

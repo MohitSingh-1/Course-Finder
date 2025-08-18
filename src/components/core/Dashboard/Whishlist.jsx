@@ -51,7 +51,7 @@ const Whishlist = () => {
     }
   };
   return (
-    <div className="flex flex-row ">
+    <div className="flex flex-row pb-10 md:pb-0 ">
       <Sidebar />
       <div className="w-[100%] overflow-y-auto" style={{ height: height }}>
         <div
@@ -86,6 +86,7 @@ const Whishlist = () => {
                         {val.courseDescription}
                       </p>
                       <p>{val.whatYouWillLearn}</p>
+                      <p className="pt-2 font-2xl text-green-300 font-bold">Rs. - {val.price}</p>
                     </div>
                   </a>
                 </div>

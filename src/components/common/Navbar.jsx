@@ -13,7 +13,6 @@ import ProfileDropDown from "../core/Auth/ProfileDropDown";
 import { logout } from "../../services/operations/authAPI";
 import { apiConnector } from "../../services/apiConnector";
 import { categories } from "../../services/apis";
-import { ACCOUNT_TYPE } from "../../utils/Constants";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -64,7 +63,6 @@ const Navbar = () => {
   };
 
   const catalogHandler = (e) => {
-    e.stopPropagation();
     setShowCatalog(!showCatalog);
   };
 
@@ -91,7 +89,7 @@ const Navbar = () => {
 
         {/* Navigation Menu */}
         <nav
-          className={`md:static z-10000  md:w-auto w-[40%] absolute top-[6.7vh] right-8 bg-gray-800 md:bg-transparent transition-all duration-300 ease-in-out z-50 ${
+          className={`md:static z-10000  md:w-auto w-[40%] absolute top-[6.7vh] right-8 bg-gray-800 md:bg-transparent transition-all duration-300 ease-in-out  ${
             isMenuOpen ? "block" : "hidden"
           } md:block`}
         >
@@ -113,7 +111,7 @@ const Navbar = () => {
                                 <li key={ele._id}>
                                   <Link
                                     to={`/catalog/${ele.name}`}
-                                    state={{ id: ele._id }}
+                                    state={{ id: ele._id, name:ele.name,description:ele.description }}
                                     className="block px-4 py-2 hover:bg-gray-600 hover:text-blue-400 transition-all duration-150 text-sm text-gray-300"
                                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                                   >

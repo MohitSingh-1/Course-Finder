@@ -5,9 +5,6 @@ import { setLoading, setToken } from "../../slices/authSlice"
 import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiConnector"
 import { endpoints } from "../apis"
-import { useState } from "react"
-import ConfirmLogout from "../../pages/ConfirmLogout"
-import { useSelector } from "react-redux"
 
 const {
   SENDOTP_API,
@@ -130,7 +127,6 @@ export function logout(navigate) {
   return (dispatch) => {
     dispatch(setToken(null))
     dispatch(setUser(null))
-    // dispatch(resetCart())
     localStorage.removeItem("token")
     localStorage.removeItem("user")
     toast.success("Logged Out")

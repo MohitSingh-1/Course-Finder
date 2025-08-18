@@ -44,7 +44,7 @@ html, body{
     position: absolute;
     top: 12px;
     right: 20px;
-    z-index: 11111;
+    /* z-index: 11111; */
 }
 .course_main{
   position: relative;

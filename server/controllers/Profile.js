@@ -12,8 +12,7 @@ exports.updateProfile = async(req, res)=>{
         // return response
 
         // get data if not given then consdering some of them as null 
-        const {gender, dateOfBirth="", about="", contactNumber, profession="none", userId} = req.body;
-        console.log(gender, dateOfBirth, about, contactNumber, profession, userId)
+        const {gender, dateOfBirth="", about="", contactNumber, userId} = req.body;
         // const userId = req.user.id;
         // validate the data
         if(!gender || !contactNumber || !userId){

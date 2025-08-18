@@ -4,9 +4,9 @@ import HighLightText from './HighLightText'
 import { HiArrowRight } from "react-icons/hi";
 import { TypeAnimation } from 'react-type-animation';
 
-const CodeBlocks = ({position, heading, subheading, ctabtn1, ctabtn2, code, bgGradient, codeColor}) => {
+const CodeBlocks = ({position, heading, subheading, code, bgGradient, codeColor}) => {
   return (
-    <div className={`flex md:flex-row ${position} my-2 gap-20 flex-col`}>
+    <div className={`flex md:flex-row ${position} my-2 gap-20 flex-col `}>
 
       {/* Section - 1 */}
         <div className="md:w-[50%] flex flex-col gap-8  md:pr-10 ">
@@ -15,17 +15,6 @@ const CodeBlocks = ({position, heading, subheading, ctabtn1, ctabtn2, code, bgGr
                 {subheading}
             </div>
 
-            <div className="flex md:gap-12 mt-3 text-center justify-center gap-[5vw]">
-                <CTAButton color={ctabtn1.color} linkto={ctabtn1.linkto}>
-                    <div className="flex gap-2 items-center">
-                        {ctabtn1.text}
-                        <HiArrowRight/>
-                    </div>
-                </CTAButton>
-                <CTAButton color={ctabtn2.color} linkto={ctabtn2.linkto}>
-                    {ctabtn2.text}
-                </CTAButton>
-            </div>
         </div>
 
         {/* Section 2 */}

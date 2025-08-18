@@ -104,23 +104,7 @@ exports.categoryPageDetails = async (req, res) => {
                 //   match: { status: "Published" },
             })
             .exec()
-        //console.log("Different COURSE", differentCategory)
-        // Get top-selling courses across all categories
-
-        // const allCategories = await Category.find()
-        //     .populate({
-        //         path: "courses",
-        //         match: { status: "Published" },
-        //         populate: {
-        //             path: "instructor",
-        //         },
-        //     })
-        //     .exec()
-        // const allCourses = allCategories.flatMap((category) => category.courses)
-        // const mostSellingCourses = allCourses
-        //     .sort((a, b) => b.sold - a.sold)
-        //     .slice(0, 10)
-        
+            
         // console.log("mostSellingCourses COURSE", mostSellingCourses)
         res.status(200).json({
             success: true,

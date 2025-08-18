@@ -30,7 +30,7 @@ exports.sendOtp = async(req,res)=>{
             specialChars:false,
             lowerCaseAlphabets:false
         })
-        console.log("OTP generated : ",otp);
+        // console.log("OTP generated : ",otp);
 
         // check unique otp or not
         const result = await OTP.findOne({otp:otp});
@@ -48,7 +48,6 @@ exports.sendOtp = async(req,res)=>{
 
         // make entry in the database
         const otpBody = await OTP.create(otpPayload);
-        console.log(otpBody);
 
         res.status(200).json({
             success:true,
@@ -116,9 +115,9 @@ exports.signupHandler = async (req,res)=>{
         }
 
         // find most recent OTP
-        console.log("lola lola ",otp);
+        // console.log("lllalalalla ",otp);
         const recentOtp = await OTP.find({email}).sort({createdAt:-1}).limit(1);    // only 1 otp and recent otp fetch
-        console.log("Recent otp is : ",recentOtp);
+        // console.log("Recent otp is : ",recentOtp);
 
         // validate otp
         if(recentOtp.length == 0){
@@ -237,17 +236,14 @@ exports.loginHandler = async (req,res)=>{
             payload,
             process.env.JWT_SECRET,
             {
-                expiresIn:"3h"
+                expiresIn:"24h"
             }
         )
         
         user.token = token;
         user.password = undefined;
-        const options = {
-            expires:new Date(Date.now() + (3*24*60*60*1000)),
-            httpOnly:true,
-        }
-        res.cookie("token",token, options).status(200).json({
+        
+        res.status(200).json({
             success:true,
             user,
             token,
