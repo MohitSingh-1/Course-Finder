@@ -8,7 +8,8 @@ const {
     getAllCourses,
     getCourseDetails,
     getAllCoursesByInstructorId,
-    getAllCoursesByCategoryId
+    getAllCoursesByCategoryId,
+    deleteCourse
 } = require("../controllers/Coures");
 
 // category controller import
@@ -43,18 +44,15 @@ const {auth, isStudent, isAdmin, isInstructor} = require("../middlewares/auth");
 
 // create course only by instructor
 router.post("/createCourse", auth, isInstructor, createCourse);
-// add a section to a course
-// router.post("/addSection", auth, isInstructor, createSection);
-// // update a section
-// router.post("/updateSection", auth, isInstructor, updateSection);
-// // delete a section
-// router.post("/deleteSection", auth, isInstructor, deleteSection);
 
 // get All registered courses
 router.get("/getAllCourses", getAllCourses);
 
 // get courses by category id
 router.get("/getAllCoursesByCategoryId/:id", getAllCoursesByCategoryId);
+
+// delete course
+router.delete("/deleteCourse/:id",auth, isInstructor, deleteCourse);
 
 // get details of specific course
 router.get("/getCourseDetails", getCourseDetails);

@@ -254,3 +254,21 @@ exports.getAllCoursesByCategoryId = async (req, res) => {
 // update a course
 
 // delete a course
+exports.deleteCourse = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const isDeleted = await Course.deleteOne({_id: id});
+
+    return res.status(200).json({
+      success: true,
+      message: "Course deletion successful",
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error while extracting the courses, try again",
+      error: err.message,
+    });
+  }
+};
