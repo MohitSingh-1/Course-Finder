@@ -20,6 +20,7 @@ import Courses from "./components/core/Dashboard/Courses";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Footer from "./components/common/Footer";
 import CourseList from "./components/core/Dashboard/CourseList";
+import AiSearch from "./pages/AiSearch"; 
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           <Route path="/dashboard/add-course" element={<AddCourses/>}/>
           <Route path="/catalog/:name" element={<Courses />}/>
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/aisearch" element={<AiSearch/>} />
 
           {/* /course-list  add-course*/}
           <Route path="*" element={<Error/>}/>

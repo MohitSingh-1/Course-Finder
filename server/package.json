@@ -22,6 +22,7 @@
     "mongoose": "^8.16.2",
     "nodemailer": "^7.0.5",
     "nodemon": "^3.1.10",
+    "openai": "^5.13.1",
     "otp-generator": "^4.0.1"
   }
 }

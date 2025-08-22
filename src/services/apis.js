@@ -81,3 +81,8 @@ export const wishlistEndpoints = {
   GET_WISHLIST: BASE_URL + "/wishlist/getWishlist",
   REMOVE_WISHLIST: BASE_URL + "/wishlist/removeFromWishlist",
 }
+
+// AI SEARCH 
+export const aisearch = {
+  AI_SEARCH:BASE_URL + "/aisearch/ai"
+}

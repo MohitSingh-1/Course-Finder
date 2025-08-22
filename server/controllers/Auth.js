@@ -208,7 +208,7 @@ exports.loginHandler = async (req,res)=>{
         if(!user){
             return res.status(400).json({
                 success:false,
-                message:"Invalid credentials"
+                message:"No account found"
             })
         }
 
@@ -223,7 +223,7 @@ exports.loginHandler = async (req,res)=>{
                     success:false,
                     message:"Invalid credentials"
                 }
-            )
+            ) 
         }
         
         // password matches -> creating JWT token 

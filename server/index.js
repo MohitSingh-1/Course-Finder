@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const userRoutes = require("./routes/User");
 const contactRoutes = require("./routes/Contact");
+const AI_Search = require("./routes/AI_Search");
 const courseRoutes = require("./routes/Course");
 const profileRoutes = require("./routes/Profile");
 const wishlist = require("./routes/wishlist");
@@ -25,8 +26,8 @@ app.use(express.json());    // middleware for parsing the data into json
 
 app.use(
 	cors({
-		origin:"https://course-finder-nu.vercel.app",
-		// origin:"http://localhost:5173",
+		// origin:"https://course-finder-nu.vercel.app",
+		origin:"http://localhost:5173",
 		credentials:true,
 	})
 );
@@ -44,6 +45,7 @@ app.use("/api/v1/course", courseRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/reach", contactRoutes);
 app.use("/api/v1/wishlist", wishlist); 
+app.use("/api/v1/aisearch", AI_Search);
 
 // default routes
 app.get("/",(req, res)=>{
