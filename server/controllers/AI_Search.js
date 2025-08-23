@@ -13,10 +13,10 @@ export const chatController = async (req, res) => {
     const prompt = `You are a professional course search engine. I need exactly 6 REAL, currently available online ${subject} courses.
 
     CRITICAL INSTRUCTIONS:
-    🚨 ONLY return courses that you are CERTAIN exist and are currently available
-    🚨 NO fictional courses, fake instructors, or made-up links
-    🚨 Focus on courses launched or updated in 2023-2024 (avoid old/expired courses)
-    🚨 Each course must be from your actual knowledge of real platforms
+    - ONLY return courses that you are CERTAIN exist and are currently available
+    - NO fictional courses, fake instructors, or made-up links
+    - Focus on courses launched or updated in 2023-2024 (avoid old/expired courses)
+    - Each course must be from your actual knowledge of real platforms
 
     SEARCH CRITERIA:
     - Subject: "${subject}"
@@ -42,12 +42,12 @@ export const chatController = async (req, res) => {
     }
 
     VALIDATION CHECKLIST for each course:
-    ✅ Course exists on mentioned platform
-    ✅ Instructor is real person who teaches this course  
-    ✅ Price is current and accurate
-    ✅ Course link follows correct platform URL structure
-    ✅ Image link is from course's actual page
-    ✅ Course is currently available (not expired/removed)
+    -Course exists on mentioned platform
+    -Instructor is real person who teaches this course  
+    -Price is current and accurate(visit the site and extract exact information as you provide wrong price all the time),
+    -Course link follows correct platform URL structure
+    -Image link is from course's actual page
+    -Course is currently available (not expired/removed)
 
     QUALITY REQUIREMENTS:
     - Prioritize highly-rated courses (4.0+ rating)
@@ -63,7 +63,7 @@ export const chatController = async (req, res) => {
     Response (valid JSON only):`;
 
     const model = genAI.getGenerativeModel({ 
-      model: "gemini-2.5-flash", 
+      model: "gemini-1.5-flash", 
       generationConfig: {
         temperature: 0.1, // Lower temperature for more factual responses
       }
@@ -72,12 +72,20 @@ export const chatController = async (req, res) => {
     const response = await result.response;
     const text = response.text();
     
-    // Clean the response text
-    let cleanText = text.trim();
-    // Remove markdown code blocks if present
-    cleanText = cleanText.replace(/```json\n?/g, '').replace(/```\n?/g, '');
-  
-    const finalResponse = JSON.parse(cleanText);
+   // Clean the response text
+  let cleanText = text.trim();
+  // Remove markdown code blocks if present
+  cleanText = cleanText.replace(/```json\n?/g, '').replace(/```\n?/g, '');
+
+  // Extract JSON safely
+  const jsonMatch = cleanText.match(/\{[\s\S]*\}/);
+
+  if (!jsonMatch) {
+    throw new Error("No valid JSON object found in AI response");
+  }
+
+  const finalResponse = JSON.parse(jsonMatch[0]);
+
     
     // Validate response structure
     if (!finalResponse.courses || !Array.isArray(finalResponse.courses)) {
