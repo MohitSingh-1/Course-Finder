@@ -20,6 +20,7 @@ const VerifyEmail = () => {
             navigate("/signup");
         }
     },[])
+
     const submitHandler = (e)=>{
         e.preventDefault();
 
@@ -34,6 +35,8 @@ const VerifyEmail = () => {
         
         dispatch(signUp(accountType, firstName, lastName, email, password, confirmPassword, otp, navigate))
     }
+
+    
     const resendOtpHandler = (e)=>{
         dispatch(sendOtp(email, navigate));
     }

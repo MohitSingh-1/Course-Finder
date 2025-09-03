@@ -89,13 +89,6 @@ const Home = () => {
       </section>
 
       {/* Section 2  */}
-      {/* <section>
-        <div className="h-10 w-full"></div>
-      </section> */}
-
-      {/* Section 3  */}
-
-      {/* Section 4  */}
       <section className="relative mx-auto flex flex-col md:flex-row  items-center justify-center gap-15 md:gap-30 ">
         {/* part  - 1 */}
         <div className="md:mt-20 flex md:mb-20 mx-auto w-[50%] justify-end ">

@@ -6,62 +6,48 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-
 // send otp
-exports.sendOtp = async(req,res)=>{
-    try{
-        // fetch email from body
-        const {email} = req.body;
+exports.sendOtp = async (req, res) => {
+  try {
+    // fetch email from body
+    const { email } = req.body;
 
-        // checking if user already exists
-        const checkUserPresent = await User.findOne({email});
+    // checking if user already exists
+    const checkUserPresent = await User.findOne({ email });
 
-        // if already exist
-        if(checkUserPresent){
-            return res.status(401).json({
-                success:false,
-                message:"User Already Exists"
-            })
-        }
-
-        // generate otp
-        var otp = otpGenerator.generate(6, {
-            upperCaseAlphabets:false,
-            specialChars:false,
-            lowerCaseAlphabets:false
-        })
-        // console.log("OTP generated : ",otp);
-
-        // check unique otp or not
-        const result = await OTP.findOne({otp:otp});
-
-        while(result){
-            otp = otpGenerator.generate(6, {
-                upperCaseAlphabets:false,
-                specialChars:false,
-                lowerCaseAlphabets:false
-            })
-            result = await OTP.findOne({otp:otp});
-        }
-
-        const otpPayload = {email, otp};
-
-        // make entry in the database
-        const otpBody = await OTP.create(otpPayload);
-
-        res.status(200).json({
-            success:true,
-            message:"OTP sent successfully",
-        })
-
-    }catch(err){
-        condole.log("Error while sending otp : ",err);
-        return res.status(500).json({
-            success:false,
-            message:err.message
-        })
+    // if already exist
+    if (checkUserPresent) {
+      return res.status(401).json({
+        success: false,
+        message: "User Already Exists",
+      });
     }
-}
+
+    // generate otp
+    const otp = otpGenerator.generate(6, {
+      upperCaseAlphabets: false,
+      specialChars: false,
+      lowerCaseAlphabets: false,
+    });
+
+    // payload with email + otp
+    const otpPayload = { email, otp };
+
+    // make entry in the database
+    await OTP.create(otpPayload);
+
+    res.status(200).json({
+      success: true,
+      message: "OTP sent successfully",
+    });
+  } catch (err) {
+    console.log("Error while sending otp : ", err);
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
 
 // signup
 exports.signupHandler = async (req,res)=>{
@@ -115,7 +101,6 @@ exports.signupHandler = async (req,res)=>{
         }
 
         // find most recent OTP
-        // console.log("lllalalalla ",otp);
         const recentOtp = await OTP.find({email}).sort({createdAt:-1}).limit(1);    // only 1 otp and recent otp fetch
         // console.log("Recent otp is : ",recentOtp);
 

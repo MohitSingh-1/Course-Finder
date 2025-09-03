@@ -38,11 +38,15 @@ function App() {
           <Route path="/contact" element={<Contact/>} />
           <Route path="/about" element={<About/>}/>
           <Route path="/dashboard" element={<Dashboard/>}/>
+
+          {/* Here the different components goes to the right section (where outlet is placed) in the dashboard */}
           <Route path="/dashboard/my-profile" element={<MyProfile/>}/>
           <Route path="/dashboard/wishlist" element={<Whishlist/>}/>
           <Route path="/dashboard/settings" element={<Settings/>}/>
           <Route path="/dashboard/course-list" element={<CourseList/>}/>
           <Route path="/dashboard/add-course" element={<AddCourses/>}/>
+
+
           <Route path="/catalog/:name" element={<Courses />}/>
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/aisearch" element={<AiSearch/>} />

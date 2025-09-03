@@ -105,42 +105,6 @@ const { user } = useSelector((state) => state.profile);
             </button>
             </div>
         </form>
-
-        {/* Delete Account Section */}
-        {/* <div className="bg-red-950 p-6 rounded-md text-white shadow-md">
-            <div className="flex items-start gap-4">
-            <div className="bg-red-700 rounded-full p-3">
-                <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-6 h-6"
-                >
-                <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                />
-                </svg>
-            </div>
-            <div>
-                <h3 className="text-lg font-bold mb-2">Delete Account</h3>
-                <p className="text-sm mb-2">
-                Would you like to delete your account? This account may contain
-                Paid Courses. Deleting your account is permanent and will remove
-                all the content associated with it.
-                </p>
-                <p
-                className="italic text-red-400 cursor-pointer underline"
-                onClick={handleDeleteAccount}
-                >
-                I want to delete my account.
-                </p>
-            </div>
-            </div>
-        </div> */}
         </div>
    </div>
   );

@@ -77,6 +77,7 @@ const Courses = () => {
       }
     }
   };
+  
   const removeWishList = async (value) => {
     let user = localStorage.getItem("user");
     if (user) {

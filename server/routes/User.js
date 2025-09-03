@@ -3,7 +3,6 @@ const router = express.Router();
 
 // import the required controllers and middlewares
 const {
-    sentOtp,
     signupHandler,
     loginHandler,
     changePassword,

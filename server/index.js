@@ -11,7 +11,7 @@ const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const {cloudinaryConfig} = require("./config/cloudinary");
 const fileUpload = require("express-fileupload");
-// // why i need this?
+
 const cors = require("cors");
 const PORT = process.env.PORT || 4000;
 
@@ -27,7 +27,7 @@ app.use(express.json());    // middleware for parsing the data into json
 app.use(
 	cors({
 		origin:"https://course-finder-nu.vercel.app",
-		// origin:"http://localhost:5173",
+		origin:"http://localhost:5173",
 		credentials:true,
 	})
 );

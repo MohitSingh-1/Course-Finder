@@ -49,48 +49,6 @@ exports.updateProfile = async(req, res)=>{
     }
 }
 
-// delete Account
-// TODO -> schedule the account to delete after some time automatically
-exports.deleteAccount = async(req, res)=>{
-    try{
-        // fetch the user id
-        // validation
-        // delete the user's profile first
-        // delete the user
-        // return response
-
-        // get data
-        const userId = req.user.id;
-        
-        // validation
-        const userDetails = await User.findById(userId);
-        if(!userDetails){
-            return res.status(404).json({
-                success:false,
-                message:"Unable to get the user's data",
-            })
-        }
-
-        // delete profile
-        await Profile.findByIdAndDelete(userDetails.additionalDetails);
-
-        // delete the user
-        await User.findByIdAndDelete(userId);
-
-        return res.status(200).json({
-            success:true,
-            message:"User account deleted successfully",
-        })
-
-    }catch(err){
-        console.error("Error deleting the account:", error);
-		res.status(500).json({
-			success: false,
-			message: "Internal server error",
-		});
-    }
-}
-
 exports.getAllUserDetails = async(req, res)=>{
     try{
         // get the user id

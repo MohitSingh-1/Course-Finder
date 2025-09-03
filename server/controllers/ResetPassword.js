@@ -48,7 +48,7 @@ exports.resetPasswordToken = async(req, res)=>{
             {new:true}  // updated document return hoga otherwise old document return hoga from the database
         )
         // link generate
-        const url = `http://localhost:3000/update-password/${token}`;
+        const url = `https://course-finder-nu.vercel.app/update-password/${token}`;
 
         // send mail 
         await mailSender(email,"CourseFinder Password Reset Link",`Password Reset Link : ${url}`)

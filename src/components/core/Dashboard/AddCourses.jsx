@@ -67,7 +67,7 @@ const AddCourses = () => {
         navigate("/dashboard/course-list");
       }
     } catch (err) {
-      console.log("Error while fetching the calatog list : ", err);
+      console.log("Error while creating the course : ", err);
     }
   };
 

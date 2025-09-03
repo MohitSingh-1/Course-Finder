@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { apiConnector } from "../../../services/apiConnector";
 import { courseEndpoints } from "../../../services/apis";
+import Sidebar from "./Sidebar";
 
 const CourseList = () => {
   const { user } = useSelector((state) => state.profile);
@@ -66,12 +67,9 @@ const handleDeleteCourse = async (courseId) => {
     }
   }, [user]);
 
-    // console.log(courseList)
-
-
   return (
     <div className="flex flex-row">
-      {/* <Sidebar /> */}
+      <Sidebar />
       <div className="w-[100%]  overflow-y-auto mb-10" style={{ height: height }}>
         <div
           style={{ height: height }}

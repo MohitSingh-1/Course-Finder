@@ -15,10 +15,9 @@ const MyProfile = () => {
     contactNumber: "",
   });
   const { user } = useSelector((state) => state.profile);
-  // console.log('user---',user)
   const [isOpen, setIsOpen] = useState(false);
-//   const additional = user?.additionalDetails || {};
-  const [additional,setAdditional]=useState({})
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -29,16 +28,13 @@ const MyProfile = () => {
 
   const fetchCourses = async () => {
    if(user?._id){
-
      try {
        const result = await apiConnector(
          "GET",
          `${profileEndpoints.GET_PROFILE_API}/${user?._id}`
        );
-       // console.log(result)
-
        if(result.status==200){
-dispatch(setUser(result.data.userDetails))
+          dispatch(setUser(result.data.userDetails));
        }
      } catch (err) {
        console.log("Error while fetching the calatog list : ", err);
@@ -46,6 +42,7 @@ dispatch(setUser(result.data.userDetails))
    }
     
   };
+  
   useEffect(() => {
     fetchCourses();
   }, [user?._id]);
@@ -93,23 +90,8 @@ dispatch(setUser(result.data.userDetails))
               <p className="text-sm text-gray-400">{user?.email}</p>
             </div>
           </div>
-          {/* <button className="bg-yellow-400 text-black px-4 py-2 rounded-md font-semibold">
-            Edit
-          </button> */}
         </div>
 
-        {/* About */}
-        {/* <div className="bg-gray-800 p-6 rounded-md flex justify-between items-center">
-            <div>
-            <h3 className="text-lg font-semibold">About</h3>
-            <p className="text-sm text-gray-400 mt-2">
-                {additional?.about || "Write Something About Yourself"}
-            </p>
-            </div>
-            <button className="bg-yellow-400 text-black px-4 py-2 rounded-md font-semibold">
-            Edit
-            </button>
-        </div> */}
 
         {/* Personal Details */}
         <div className="bg-gray-800 p-6 rounded-md">

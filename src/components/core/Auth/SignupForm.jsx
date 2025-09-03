@@ -24,6 +24,8 @@ const SignupForm = () => {
     firstName: "",
     lastName: "",
   });
+
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
@@ -33,6 +35,8 @@ const SignupForm = () => {
     dispatch(setSignupData(formData));
     dispatch(sendOtp(formData.email, navigate));
   };
+
+  
   function changeHandler(e) {
     setFormData((prevFormData) => {
       return {
