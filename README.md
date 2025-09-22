@@ -31,7 +31,7 @@ The project ensures a **secure authentication flow with email-based OTP verifica
 
 ## 📺 Live Demo
 
-> `https://find-accommodation-gules.vercel.app/`
+> `https://course-finder-nu.vercel.app/`
 
 ---
 
@@ -163,7 +163,7 @@ coursefinder/
 
 ## 👨‍💼 Author
 
-**Aksat Kushwah** – [@mohitsingh](https://github.com/MohitSingh-1)
+**Mohit Kumar Singh** – [@mohitsingh](https://github.com/MohitSingh-1)
 Feel free to reach out for collaboration or questions!
 
 ---
