@@ -27,7 +27,7 @@ app.use(express.json());    // middleware for parsing the data into json
 app.use(
 	cors({
 		origin:"https://course-finder-nu.vercel.app",
-		origin:"http://localhost:5173",
+		//origin:"http://localhost:5173",
 		credentials:true,
 	})
 );
